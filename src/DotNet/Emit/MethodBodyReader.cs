@@ -270,17 +270,23 @@ namespace dnlib.DotNet.Emit {
 
 		/// <inheritdoc/>
 		protected override IField ReadInlineField(Instruction instr) {
-			return opResolver.ResolveToken(reader.ReadUInt32()) as IField;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+            return opResolver.ResolveToken(token) as IField;
 		}
 
 		/// <inheritdoc/>
 		protected override IMethod ReadInlineMethod(Instruction instr) {
-			return opResolver.ResolveToken(reader.ReadUInt32()) as IMethod;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+            return opResolver.ResolveToken(token) as IMethod;
 		}
 
 		/// <inheritdoc/>
 		protected override MethodSig ReadInlineSig(Instruction instr) {
-			var standAloneSig = opResolver.ResolveToken(reader.ReadUInt32()) as StandAloneSig;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+            var standAloneSig = opResolver.ResolveToken(token) as StandAloneSig;
 			if (standAloneSig == null)
 				return null;
 			var sig = standAloneSig.MethodSig;
@@ -291,17 +297,23 @@ namespace dnlib.DotNet.Emit {
 
 		/// <inheritdoc/>
 		protected override string ReadInlineString(Instruction instr) {
-			return opResolver.ReadUserString(reader.ReadUInt32()) ?? string.Empty;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+			return opResolver.ReadUserString(token) ?? string.Empty;
 		}
 
 		/// <inheritdoc/>
 		protected override ITokenOperand ReadInlineTok(Instruction instr) {
-			return opResolver.ResolveToken(reader.ReadUInt32()) as ITokenOperand;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+			return opResolver.ResolveToken(token) as ITokenOperand;
 		}
 
 		/// <inheritdoc/>
 		protected override ITypeDefOrRef ReadInlineType(Instruction instr) {
-			return opResolver.ResolveToken(reader.ReadUInt32()) as ITypeDefOrRef;
+            var token = reader.ReadUInt32();
+            instr.OperandToken = token;
+			return opResolver.ResolveToken(token) as ITypeDefOrRef;
 		}
 
 		/// <summary>

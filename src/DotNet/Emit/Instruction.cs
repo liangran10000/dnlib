@@ -44,6 +44,15 @@ namespace dnlib.DotNet.Emit {
 		/// </summary>
 		public uint Offset;
 
+        /// <summary>
+        /// Returns the token for the instruction's operand.
+        /// </summary>
+        /// <returns>The operand.</returns>
+        public uint GetOperandToken() {
+            return OperandToken;
+        }
+        internal uint OperandToken;
+
 		/// <summary>
 		/// Default constructor
 		/// </summary>
